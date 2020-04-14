@@ -1,0 +1,36 @@
+---
+title: "R Markdown Presentation & Plotly"
+author: "Mounika Gopinath"
+date: "4/14/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r data}
+library(dplyr)
+library(plotly)
+library(gapminder)
+data(gapminder)
+gapminder <- gapminder %>% filter(year == "2007")
+x <- list(title = "GDP Per Capita (USD, Inflation Adjusted)")
+y <- list(title = "Life Expectancy (Years)")
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot_ly(gapminder, x = ~gdpPercap, y = ~lifeExp, 
+        type = "scatter", mode = "markers", 
+        color = ~continent, text = ~country) %>% 
+  layout(xaxis = x, yaxis = y, title = "GDP Per Capita and Life Expectancy Across the World")
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
